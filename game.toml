@@ -51,7 +51,9 @@ internal_resolution = "display"
 # override any of these per player.
 antialiasing = true
 antialiasing_mode = "fxaa_hq"
-texture_filtering = "bilinear"
+# "stable" filters PGXP-tracked 3D geometry and keeps 2D sprites and the HUD
+# on nearest, so scoreboard and menu text stay sharp at high resolutions.
+texture_filtering = "stable"
 texture_lod = "mipmap"
 anisotropic_filtering = 16
 fmv_filter = "bicubic"

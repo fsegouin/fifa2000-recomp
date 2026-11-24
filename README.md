@@ -21,8 +21,9 @@ and Linux.
   Matches render a genuinely wider view: the pitch, lines, players, stands and
   sky fill the frame. Menus, loading screens and videos stay 4:3.
 - **Higher resolution and filtering.** Rendering at the display's resolution,
-  PGXP vertex precision and perspective-correct textures, bilinear filtering,
-  FXAA and mipmaps, all adjustable in the launcher's Display and PGXP pages.
+  PGXP vertex precision and perspective-correct textures, filtered 3D textures
+  with sharp HUD and menu text, FXAA and mipmaps, all adjustable in the
+  launcher's Display and PGXP pages.
 
 ## Legal
 
