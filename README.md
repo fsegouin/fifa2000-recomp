@@ -59,7 +59,7 @@ change below is inert at 4:3, where the original code runs unchanged.
 | What | Where |
 |---|---|
 | Pitch, crowd and model rejects in the match engine | `game.toml`, `[widescreen.cull]` |
-| Pitch-line clipping, reimplemented with wider bounds | `src/mods/fifa2000_pitch_lines.c` |
+| Pitch-line clipping, reimplemented with wider bounds; with PGXP, lines on sub-pixel positions and arcs as smooth bands | `src/mods/fifa2000_pitch_lines.c` |
 | The camera view cone that decides which players are drawn | `src/mods/fifa2000_player_cull.c` |
 | The sky backdrop, and detecting when the 3D match is on screen | `src/mods/fifa2000_sky.c` |
 | The scoreboard, anchored to the wide frame's top-left corner | `src/mods/fifa2000_scoreboard.c` |

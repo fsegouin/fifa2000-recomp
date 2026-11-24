@@ -6,4 +6,7 @@
  * screens shown with the match engine resident (loading, controls) stay 4:3. */
 void fifa2000_note_match_render(void);
 
+/* Allocates the pitch-line arena; called from the widescreen activation. */
+void fifa2000_pitch_lines_activate(void);
+
 #endif

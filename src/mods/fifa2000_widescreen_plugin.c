@@ -73,6 +73,7 @@ static void fifa2000_widescreen_activate(void) {
         strcpy(aspect, "16:9");
 
     psx_mod_set_world_scene_predicate(fifa2000_match_scene);
+    fifa2000_pitch_lines_activate();
 
     /* The fixed aspect also shapes the first window; Fit then follows every
      * resize from 4:3 upward with no upper limit. */
