@@ -1,0 +1,41 @@
+format_version = 6
+id = "fifa2000.enhancement.widescreen"
+version = "1.0.0"
+name = "Widescreen"
+author = "fifa2000-recomp"
+description = "Widens the 3D match view beyond 4:3. Menus, loading screens and videos stay 4:3."
+resolver = "declarative"
+save_compatibility = "shared"
+
+[[target]]
+game_id = "SLES-02315"
+
+[[feature]]
+id = "widescreen"
+name = "Widescreen"
+description = "Render matches at a wider aspect. Fit to Window follows the window shape, so fullscreen fills the display."
+group = "Display"
+channel = "experimental"
+default_enabled = true
+quick = true
+
+[[option]]
+feature = "widescreen"
+id = "aspect"
+label = "View"
+description = "16:9 keeps a fixed widescreen frame. Fit to Window follows live resizing from 4:3 upward."
+group = "Display"
+type = "choice"
+default = "16:9"
+
+[[option.choice]]
+value = "16:9"
+label = "16:9"
+
+[[option.choice]]
+value = "Fit"
+label = "Fit to Window"
+
+[[plugin]]
+feature = "widescreen"
+id = "fifa2000.widescreen"

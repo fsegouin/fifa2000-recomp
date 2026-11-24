@@ -1,0 +1,48 @@
+{
+  "format_version": 1,
+  "game": {
+    "name": "FIFA2000",
+    "id": "SLES-02315",
+    "boot_exe": "SLES_023.15"
+  },
+  "marketing": {
+    "description": "",
+    "publisher": "EA Sports",
+    "year": "1999",
+    "region": "Europe",
+    "players": 2
+  },
+  "rom_identity": {
+    "cue_name": "FIFA 2000 (Europe) (En,De,Es,Nl,Sv) (Rev 1).cue",
+    "bin_name": "FIFA 2000 (Europe) (En,De,Es,Nl,Sv) (Rev 1).bin",
+    "track_counts": [
+      1
+    ],
+    "require_cue": true,
+    "data_track": {
+      "size": 492388848,
+      "md5": "5f769c3fad977cbc0c621ff26394f1e8",
+      "sha1": "10b91d663362ffd201cce43fccebaec39273af7b",
+      "crc32": "05350a63"
+    },
+    "disc_fp": "78c2e4f2fd4173fbd9e8cfb29c8579e978d909364af9cd6a46e7eec7f2c793ff"
+  },
+  "exe": {
+    "load_address": "0x80010000",
+    "entry_pc": "0x80010898",
+    "text_size": "0x0002F000",
+    "stack_base": "0x801FFFF0"
+  },
+  "seeds": {
+    "count": 546,
+    "source": "boot_exe_jal"
+  },
+  "warnings": [
+    "cue has only 1 TRACK \u2014 Track-01-only dumps fail multi-track netplay/catalog gates; prefer a full Redump cue."
+  ],
+  "notes": [
+    "entry_pc/load_address/text_size/stack_base taken from PS-X EXE header.",
+    "seeds are first-pass boot-EXE JAL targets (+ entry); expect to grow as overlays / runtime paths are discovered.",
+    "required_disc_fp is psxrecomp-toc-v1 (matches runtime DiscIdentity)."
+  ]
+}

@@ -1,0 +1,103 @@
+# Autofilled by tools/new_project_layout/probe_disc.py from your legal dump.
+# Review before shipping. Runtime quirks / overlay seeds still need hand work.
+
+[game]
+name = "FIFA2000"
+id = "SLES-02315"
+players = 2
+exe = "disc/SLES_023.15"
+# The disc image path is per machine: set it in the launcher, which saves it
+# to settings.toml next to the executable ([disc] path), or pass --disc.
+load_address = "0x80010000"
+entry_pc = "0x80010898"
+text_size = "0x0002F000"
+stack_base = "0x801FFFF0"
+
+# Digests are for data Track 01 (first BINARY FILE / TRACK 01).
+[prepare_disc]
+out_dir = "disc"
+bin_name = "FIFA 2000 (Europe) (En,De,Es,Nl,Sv) (Rev 1).bin"
+cue_name = "FIFA 2000 (Europe) (En,De,Es,Nl,Sv) (Rev 1).cue"
+boot_exe = "SLES_023.15"
+known_sizes = [492388848]
+known_md5 = [
+  "5f769c3fad977cbc0c621ff26394f1e8",
+]
+known_sha1 = [
+  "10b91d663362ffd201cce43fccebaec39273af7b",
+]
+known_crc32 = [
+  "05350a63",
+]
+
+[recompiler]
+seeds = "seeds/ghidra_funcs.txt"
+out_dir = "generated"
+strict = true
+
+[runtime]
+window_title = "FIFA2000 Recompiled"
+memcard_dir = "saves"
+overlay_cache = true
+
+[video]
+renderer = "opengl"
+# No aspect_ratio: widescreen is mod-owned on PSX (the runtime clamps this key
+# to 4:3); the Widescreen package in mods/preloaded selects 16:9 or Fit.
+# Game default resolution: the monitor's pixel height instead of the PS1's 240
+# lines. A fresh profile starts at the Internal resolution setting's 4x.
+internal_resolution = "display"
+# The framework's "Best" preset; the launcher's Display and PGXP pages
+# override any of these per player.
+antialiasing = true
+antialiasing_mode = "fxaa_hq"
+texture_filtering = "bilinear"
+texture_lod = "mipmap"
+anisotropic_filtering = 16
+fmv_filter = "bicubic"
+fmv_chroma_smoothing = true
+dithering = "fine"
+accurate_blending = true
+geometry_correction = true
+perspective_texturing = true
+
+# Screen-space trivial rejects in the match engine (BECODE_Z.BIN, loaded at
+# 0x8003EE64). The game draws at 512x256 with the GTE offset at (256,128), so
+# it rejects primitives whose every vertex is left of X=0 or right of X=512.
+# Each site widens by the live native-wide margin and is identity at 4:3.
+[widescreen.cull]
+slti_sites = [
+  # quad reject with X<<16 vertex words: right edge, X < 0x200
+  "0x80064BC4", "0x80064BD4", "0x80064BE4", "0x80064BF4",
+  # quad reject with lh-loaded X: right edge
+  "0x80064F08", "0x80064F24", "0x80064F40", "0x80064F5C",
+  # 8-corner bounding box: right edge (0x80066A80 sits in a delay slot)
+  "0x80066A80", "0x80066AFC", "0x80066B10", "0x80066B24", "0x80066B38",
+  "0x80066B4C", "0x80066B60", "0x80066B74", "0x80066B88",
+]
+bgez_sites = [
+  "0x80064B94",
+  "0x80064EA8", "0x80064EC0", "0x80064ED8",
+  "0x80066A7C", "0x80066A8C", "0x80066A9C", "0x80066AAC", "0x80066ABC",
+  "0x80066ACC", "0x80066ADC",
+]
+bltz_sites = ["0x80064EF0", "0x80066AEC"]
+# The same quad's left chain on vertex words shifted left 16 (X in the high
+# half): two bgez keeps and the final bltz reject.
+screen_x_sites = ["0x80064BA0", "0x80064BAC", "0x80064BB8"]
+# Per-player visibility (0x80048BB8): a player is drawn while -r < screen X
+# < width + r, r being its projected radius. The left bound is `negu a1,v1`
+# and the right adds r to the screen width loaded from 0x8003EB52.
+negsub_sites = ["0x80048CF0"]
+clip_edge_x_load_sites = ["0x80048D04"]
+clip_edge_width = 512
+
+[controller]
+default_mode = "digital"
+
+# Online mount gate: digests + track count + optional TOC fingerprint
+# (see docs/NETPLAY.md).
+[netplay]
+require_cue = true
+required_tracks = 1
+required_disc_fp = "78c2e4f2fd4173fbd9e8cfb29c8579e978d909364af9cd6a46e7eec7f2c793ff"

@@ -1,0 +1,8 @@
+[submodule "psxrecomp"]
+	path = psxrecomp
+	url = https://github.com/fsegouin/psxrecomp.git
+	branch = ws-cull-bgez-high-half
+[submodule "recomp-ui"]
+	path = recomp-ui
+	url = https://github.com/RetroPortingToolKit/recomp-ui.git
+	branch = master
